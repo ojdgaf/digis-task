@@ -1,0 +1,44 @@
+version: '3.5'
+
+services:
+  maven:
+    image: maven
+    container_name: ojdgaf-app
+    restart: always
+    command: mvn clean spring-boot:run
+    working_dir: /app
+    volumes:
+      - .:/app
+      - $HOME/.m2/repository:/root/.m2/repository # reuse local Maven repository
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+      - ojdgaf-task
+
+  db:
+    image: mysql
+    container_name: ojdgaf-db
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+      MYSQL_DATABASE: digis
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - ojdgaf-task
+
+  adminer:
+    image: adminer
+    container_name: ojdgaf-adminer
+    restart: always
+    ports:
+      - 8081:8080
+    networks:
+      - ojdgaf-task
+
+networks:
+  ojdgaf-task:
+    name: ojdgaf-task
