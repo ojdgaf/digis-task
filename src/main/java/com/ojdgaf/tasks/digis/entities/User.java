@@ -25,6 +25,7 @@ public class User {
 
     @Column(name = "full_name")
     @NotBlank
+    @Size(min = 2, max = 100)
     private String fullName;
 
     @Column(name = "date_of_birth")
@@ -36,6 +37,7 @@ public class User {
 
     @Column
     @NotBlank
+    @Size(min = 2, max = 100)
     // This may also be a boolean attribute but who knows how many genders we have nowadays...
     private String gender;
 
@@ -43,6 +45,14 @@ public class User {
     }
 
     public User(String login, String fullName, Date dateOfBirth, String gender) {
+        this.login = login;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+    }
+
+    public User(Integer id, String login, String fullName, Date dateOfBirth, String gender) {
+        this.id = id;
         this.login = login;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
