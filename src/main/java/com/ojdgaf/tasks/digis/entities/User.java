@@ -2,6 +2,7 @@ package com.ojdgaf.tasks.digis.entities;
 
 import java.util.Date;
 import java.util.Objects;
+import java.text.SimpleDateFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -111,5 +112,13 @@ public class User {
         if (!(o instanceof User)) return false;
 
         return Objects.equals(getLogin(), ((User) o).getLogin());
+    }
+
+    @Override
+    public String toString() {
+        return getId() + " -> "
+                + getLogin() + " (" + getFullName() + "), "
+                + new SimpleDateFormat("dd-MM-yyyy").format(getDateOfBirth()) + ", "
+                + getGender();
     }
 }
