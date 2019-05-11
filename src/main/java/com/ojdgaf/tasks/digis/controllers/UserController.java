@@ -1,12 +1,12 @@
 package com.ojdgaf.tasks.digis.controllers;
 
+import javax.validation.Valid;
+import java.util.List;
+
 import com.ojdgaf.tasks.digis.entities.User;
 import com.ojdgaf.tasks.digis.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("user")
